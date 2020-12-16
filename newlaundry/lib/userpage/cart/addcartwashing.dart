@@ -376,7 +376,7 @@ class AddCartWashingState extends State<AddCartWashingPage> {
     laundry['LaundryID'] = widget.laundryUID;
     laundry['Total'] = widget.total;
     laundry['Service'] = washing;
-    laundry['Status'] = 'รอออเดอร์';
+    laundry['Status'] = 'รอออร์เดอร์';
     laundry['order'] = widget.sumtotal;
     await databaseReference
         .collection("OrderLaundry")
