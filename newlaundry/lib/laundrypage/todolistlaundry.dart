@@ -48,7 +48,7 @@ class TodolistLaundryLaundryState extends State<TodolistLaundry> {
                   child: Row(
                     children: <Widget>[
                       Text(
-                        "ยืนยันออเดอร์",
+                        "ยืนยันออร์เดอร์",
                         style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'Prompt',
