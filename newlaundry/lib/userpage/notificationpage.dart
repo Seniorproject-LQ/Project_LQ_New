@@ -296,7 +296,7 @@ class NotificationPageState extends State<NotificationPage> {
   void showAlert() {
     AlertDialog dialog = new AlertDialog(
       content: new Container(
-        width: 300.0,
+        width: 200.0,
         height: 300.0,
         child: new Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
