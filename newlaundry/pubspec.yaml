@@ -23,7 +23,6 @@ dependencies:
   flutter_auth_buttons: ^0.10.0
   provider: ^4.0.5
   uuid: ^2.0.4
-  flutter_slidable: ^0.5.7
   
 dev_dependencies:
   flutter_test:
