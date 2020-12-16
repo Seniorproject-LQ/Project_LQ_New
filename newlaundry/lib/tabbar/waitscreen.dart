@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:newlaundry/laundrypage/todolist/order/detailorder.dart';
 
 class WaitScreen extends StatefulWidget {
   final String customerID;
@@ -151,7 +150,7 @@ class WaitScreenState extends State<WaitScreen> {
                                   ),
                                   Row(
                                     children: [
-                                      Text('ออเดอร์ : ',
+                                      Text('ออร์เดอร์ : ',
                                           style: TextStyle(
                                               color: Colors.blue[900],
                                               fontFamily: 'Prompt',
@@ -163,14 +162,7 @@ class WaitScreenState extends State<WaitScreen> {
                                           onPressed: () {
                                             List orders =
                                                 Confirmation.data()['order'];
-                                            print(orders);
-                                            // Navigator.push(
-                                            //   context,
-                                            //   MaterialPageRoute(
-                                            //       builder: (context) =>
-                                            //           DetailOrder(
-                                            //               order: orders)),
-                                            // );
+                                            showAlert(orders);
                                           })
                                     ],
                                   )
@@ -187,5 +179,116 @@ class WaitScreenState extends State<WaitScreen> {
         ),
       ),
     );
+  }
+
+  void showAlert(List orders) {
+    AlertDialog dialog = new AlertDialog(
+      content: new Container(
+        height: 400.0,
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      'คำสั่งออเดอร์',
+                      style: TextStyle(
+                          color: Colors.blue[900],
+                          fontFamily: 'Prompt',
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 300,
+              child: ListView.builder(
+                  itemCount: orders.length,
+                  itemBuilder: (context, index) {
+                    final order = orders[index];
+                    return ListTile(
+                      leading: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.grey, width: 1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            order['Count'].toString() + ' x',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Prompt',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ),
+                      title: Text(
+                        order['Type'].toString(),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Prompt',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      trailing: Text(
+                        order['Price'].toString(),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Prompt',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    );
+                  }),
+            ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RaisedButton(
+                      onPressed: () {
+                        Navigator.of(context, rootNavigator: true).pop();
+                      },
+                      elevation: 0,
+                      color: Colors.red,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'ปิด',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Prompt',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    showDialog(context: context, child: dialog);
   }
 }
